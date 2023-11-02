@@ -1,0 +1,12 @@
+<view class="wrap">
+  <van-tree-select
+  items="{{ list }}"
+  height="55vw"
+  main-active-index="{{ mainActiveIndex }}"
+  active-id="{{ activeId }}"
+  bind:click-nav="onClickNav"
+  bind:click-item="onClickItem">
+    <image wx:for="{{detailChildren}}" src="{{item.thumbnail}}" slot="content" />
+  </van-tree-select>
+
+</view>
