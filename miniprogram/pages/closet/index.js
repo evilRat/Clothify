@@ -28,7 +28,8 @@ Page({
     try {
       const result = await getClosetData();
       this.setData({
-        list: result
+        list: result,
+        clothes: result[this.data.mainActiveIndex].clothes
       })
     } catch (error) {
       console.error("err:", error)
