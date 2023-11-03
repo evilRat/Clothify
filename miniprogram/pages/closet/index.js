@@ -9,8 +9,7 @@ Page({
     list: [],
     mainActiveIndex: 0,
     activeId: null,
-    detail: {},
-    detailChildren: []
+    clothes: {},
   },
 
 
@@ -18,18 +17,12 @@ Page({
     console.log("onClickNav:", JSON.stringify(detail))
     let index = detail.index || 0
     this.setData({
-      detail: this.data.list[index],
-      detailChildren: this.data.list[index].children
+      mainActiveIndex: index,
+      clothes: this.data.list[index].clothes,
     });
-    console.log("onClickNav end:", JSON.stringify(this.data.detail))
-    console.log("onClickNav end1:", JSON.stringify(this.data.detailChildren))
+    console.log("onClickNav end:", JSON.stringify(this.data.clothes))
   },
 
-  onClickItem({ detail = {} }) {
-    const activeId = this.data.activeId === detail.id ? null : detail.id;
-
-    this.setData({ activeId });
-  },
 
   async init() {
     try {

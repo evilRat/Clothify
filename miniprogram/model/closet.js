@@ -5,7 +5,7 @@ export function closetData() {
       "text": '外套',
       thumbnail: 
       'https://cdn-we-retail.ym.tencent.com/miniapp/category/category-default.png',
-      children: [
+      clothes: [
         {
           id: 11,
           text: '夹克1',
@@ -31,7 +31,7 @@ export function closetData() {
       "text": '裤子',
       thumbnail: 
       'https://cdn-we-retail.ym.tencent.com/miniapp/category/category-default.png',
-      children: [
+      clothes: [
         {
           id: 21,
           text: '裤子1',

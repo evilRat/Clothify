@@ -1,12 +1,14 @@
 <view class="wrap">
-  <van-tree-select
-  items="{{ list }}"
-  height="55vw"
-  main-active-index="{{ mainActiveIndex }}"
-  active-id="{{ activeId }}"
-  bind:click-nav="onClickNav"
-  bind:click-item="onClickItem">
-    <image wx:for="{{detailChildren}}" src="{{item.thumbnail}}" slot="content" />
+  <van-tree-select items="{{ list }}" height="55vw" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav">
+    <view slot="content">
+      <view>{{mainActiveIndex}}</view>
+      <view wx:for="{{clothes}}" wx:key='id'>
+        <text>111</text>
+        <text>{{item.text}}</text>
+        <image width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+      </view>
+      <image src="{{clothes.thumbnail}}" />
+    </view>
   </van-tree-select>
 
 </view>
