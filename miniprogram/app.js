@@ -1,16 +1,28 @@
 App({
+  globalData: {
+
+  },
   async onLaunch() {
     this.initcloud()
 
-    this.globalData = {
-      // 用于存储待办记录的集合名称
-      collection: 'todo',
-      // 最大文件上传数量
-      fileLimit: 2
-    }
+    this.createUser()
   },
 
   flag: false,
+  createUser() {
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      success: res => {
+        let result = res.result
+        this.globalData.userInfo = {
+          openid: result.openid,
+          unionid: result.unionid,
+          appid: result.appid
+        }
+        wx.setStorageSync('userInfo', this.globalData.userInfo)
+      }
+    })
+  },
   /**
    * 初始化云开发环境（支持环境共享和正常两种模式）
    */
@@ -43,7 +55,7 @@ App({
       } else { // 如果文件中 envlist 不存在，提示要配置环境
         this.cloud = () => {
           wx.showModal({
-            content: '当前小程序没有配置云开发环境，请在 envList.js 中配置你的云开发环境', 
+            content: '当前小程序没有配置云开发环境，请在 envList.js 中配置你的云开发环境',
             showCancel: false
           })
           throw new Error('当前小程序没有配置云开发环境，请在 envList.js 中配置你的云开发环境')
@@ -91,6 +103,7 @@ App({
       })
       throw new Error(flag)
     })
+    debugger
     if (openid !== "") return openid
     return fromopenid
   }

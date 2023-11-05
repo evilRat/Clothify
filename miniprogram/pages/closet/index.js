@@ -14,13 +14,11 @@ Page({
 
 
   onClickNav({ detail = {} }) {
-    console.log("onClickNav:", JSON.stringify(detail))
     let index = detail.index || 0
     this.setData({
       mainActiveIndex: index,
       clothes: this.data.list[index].clothes,
     });
-    console.log("onClickNav end:", JSON.stringify(this.data.clothes))
   },
 
 
