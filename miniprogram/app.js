@@ -3,8 +3,7 @@ App({
 
   },
   async onLaunch() {
-    this.initcloud()
-
+    await this.initcloud()
     this.createUser()
   },
 
@@ -20,6 +19,33 @@ App({
           appid: result.appid
         }
         wx.setStorageSync('userInfo', this.globalData.userInfo)
+        this.saveOrUpdateUser(result)
+      }
+    })
+  },
+  /**
+   * 保存或更新用户信息
+   */
+  saveOrUpdateUser(userInfo) {
+    let db = wx.cloud.database()
+    db.collection("user").where({
+      _openid: userInfo.openid
+    }).get({
+      success: function(res) {
+        debugger
+        console.log(JSON.stringify(res))
+        if(!res.data) {
+          console.log("用户不存在，新增用户，openid: " + userInfo.openid)
+          db.collection("user").add({
+            data: {
+              openid: userInfo.openid,
+              unionid: userInfo.unionid,
+              appid: userInfo.appid
+            }
+          })
+        } else {
+          console.log("用户存在，略过，openid: " + userInfo.openid)
+        }
       }
     })
   },
