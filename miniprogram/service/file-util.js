@@ -34,9 +34,13 @@ export function deleteFile(fileIdList) {
 }
 
 export function getTempUrl(fileId) {
-    const result = wx.cloud.getTempFileURL({
-      fileList: [fileId]
+  return new Promise((resolve, reject) => {
+    wx.cloud.getTempFileURL({
+      fileList: [fileId],
+      success: res => {
+        resolve(res)
+      },
+      fail: err => reject(res)
     }) 
-    debugger
-    return result.fileList[0].tempFileURL
+  })
 }

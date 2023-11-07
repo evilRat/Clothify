@@ -9,11 +9,15 @@
     </van-checkbox-group>
   </my-block>
   <my-block title="评分：">
-  {{rateValue}}
     <van-rate value="{{ rateValue }}" icon="like" void-icon="like-o" bind:change="onRateChange" />
   </my-block>
-  <my-block title="上传图片">
-  {{fileList}}
-    <van-uploader file-list="{{ fileList }}" max-count="3" bind:after-read="afterRead" accept="image/*" :preview-image="true" bind:click-preview="previewPic" bind:delete="deletePic"/>
+  <my-block title="上传图片(最多3张)">
+    <van-uploader file-list="{{ fileList }}" max-count="3" bind:after-read="afterRead" accept="image/*" :preview-image="true" bind:click-preview="previewPic" bind:delete="deletePic" />
   </my-block>
+  <van-row>
+    <van-col span="8" offset="16">
+      <van-button type="primary" color="#F875AA" bind:tap="submit">放入衣柜</van-button>
+    </van-col>
+  </van-row>
+
 </van-cell-group>

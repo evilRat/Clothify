@@ -7,7 +7,11 @@
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
     "my-block": "../../../components/block/index",
-    "van-uploader": "@vant/weapp/uploader/index"
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index"
 
-  }
+  },
+  "navigationBarTitleText": "衣柜",
+  "navigationBarBackgroundColor": "#F875AA"
 }

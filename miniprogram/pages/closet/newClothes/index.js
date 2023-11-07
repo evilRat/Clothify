@@ -1,6 +1,10 @@
 // pages/closet/newClothes/index.js
 
-import { uploadFile, getTempUrl } from '../../../service/file-util';
+import {
+  uploadFile,
+} from '../../../service/file-util';
+
+const app = getApp()
 Page({
 
   /**
@@ -11,7 +15,8 @@ Page({
     nameErrMsg: null,
     rateValue: 0,
     fileList: [],
-    fileIDList: []
+    fileIDList: [],
+    seasonList: []
   },
 
   checkName(event) {
@@ -39,36 +44,54 @@ Page({
   },
 
   afterRead(event) {
-    const { file } = event.detail
+    const {
+      file
+    } = event.detail
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     uploadFile("cloudPath", file.url).then(res => {
-      debugger
       this.data.fileIDList.push(res.fileID)
-      // 获取临时url
-      let tmpUrl = getTempUrl(res.fileID)
       this.data.fileList.push({
         ...file,
-        url: tmpUrl,
-        type: 'image'
       })
-      this.setData({ fileList })
-      debugger
+      this.setData({
+        fileList: this.data.fileList
+      })
       console.log("文件上传成功，res:" + JSON.stringify(res))
     }).catch(err => {
-      debugger
       console.log("文件上传失败，err:" + JSON.stringify(err))
     })
   },
 
   submit(event) {
-      // 保存clothes
-      let db = wx.cloud.database()
-      db.collection("clothes").add({
-        data: {
-          openid: app.globalData.userInfo.openid,
-          fileID: fileId,
-        }
+    // 校验表单
+    if (!this.data.name || !this.data.seasonList || !this.data.rateValue || !this.data.fileIDList) {
+      wx.showToast({
+        title: '请完善服装信息',
+        icon: 'none'
       })
+      return
+    }
+    // 保存clothes
+    let db = wx.cloud.database()
+    db.collection("clothes").add({
+      data: {
+        openid: app.globalData.userInfo.openid,
+        name: this.data.name,
+        rateValue: this.data.rateValue,
+        fileIDList: this.data.fileIDList,
+        seasonList: this.data.seasonList,
+      }
+    }).then(res => {
+      debugger
+      wx.showToast({
+        title: '成功'
+      }).then(() => wx.navigateBack())
+    }).catch(err => {
+      wx.showToast({
+        title: '失败',
+        icon: "error"
+      })
+    })
   },
 
   /**

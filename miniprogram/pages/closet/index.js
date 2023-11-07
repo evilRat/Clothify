@@ -1,7 +1,5 @@
 // pages/closet/index.js
-import {getClosetData} from '../../service/closet'
-import { uploadFile } from '../../service/file-util';
-const app = getApp()
+import {getClosetData, getCatagory} from '../../service/closet'
 Page({
 
   /**
@@ -12,6 +10,7 @@ Page({
     mainActiveIndex: 0,
     activeId: null,
     clothes: {},
+    category: []
   },
 
 
@@ -27,9 +26,14 @@ Page({
   async init() {
     try {
       const result = await getClosetData();
+      const catagoryRes = await getCatagory();
+      let catagory = catagoryRes.data[0].value
+      catagory.forEach(e => e.text = e.name)
+      console.log("catagory: " + catagory)
       this.setData({
-        list: result,
-        clothes: result[this.data.mainActiveIndex].clothes
+        category: catagory,
+        // list: result,
+        // clothes: result[this.data.mainActiveIndex].clothes
       })
     } catch (error) {
       console.error("err:", error)
