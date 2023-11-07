@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-field": "@vant/weapp/field/index",
+    "van-rate": "@vant/weapp/rate/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "my-block": "../../../components/block/index",
+    "van-uploader": "@vant/weapp/uploader/index"
+
+  }
+}

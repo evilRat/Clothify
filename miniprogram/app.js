@@ -32,8 +32,6 @@ App({
       _openid: userInfo.openid
     }).get({
       success: function(res) {
-        debugger
-        console.log(JSON.stringify(res))
         if(!res.data) {
           console.log("用户不存在，新增用户，openid: " + userInfo.openid)
           db.collection("user").add({
@@ -129,7 +127,6 @@ App({
       })
       throw new Error(flag)
     })
-    debugger
     if (openid !== "") return openid
     return fromopenid
   }

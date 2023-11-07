@@ -1,5 +1,7 @@
 // pages/closet/index.js
 import {getClosetData} from '../../service/closet'
+import { uploadFile } from '../../service/file-util';
+const app = getApp()
 Page({
 
   /**
@@ -32,6 +34,16 @@ Page({
     } catch (error) {
       console.error("err:", error)
     }
+  },
+
+  toNewClothes() {
+    wx.navigateTo({
+      url: './newClothes/index',
+    })
+  },
+
+  beforeRead() {
+
   },
 
   /**
