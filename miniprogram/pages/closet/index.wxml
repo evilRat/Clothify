@@ -1,11 +1,10 @@
 <view class="wrap">
-<view>{{catagory}}</view>
-  <!-- <van-tree-select items="{{ catagory }}" height="100vh" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav"> -->
-    <!-- <view slot="content">
+  <van-tree-select items="{{ category }}" height="100vh" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav"> -->
+    <view slot="content">
       <van-grid column-num="3" border="{{ false }}">
         <van-grid-item use-slot wx:for="{{ clothes }}" wx:key="id">
-          <text>{{item.text}}</text>
-          <image style="width: 100%; height: 90px;" src="{{item.thumbnail}}" />
+          <text>{{item.name}}</text>
+          <image style="width: 100%; height: 90px;" src="{{item.fileIDList[0]}}" />
         </van-grid-item>
       </van-grid>
 
@@ -17,6 +16,6 @@
           <span>Upload</span>
         </button>
       </dev>
-    </view> -->
-  <!-- </van-tree-select> -->
+    </view>
+  </van-tree-select>
 </view>

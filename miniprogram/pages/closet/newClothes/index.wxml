@@ -1,5 +1,12 @@
 <van-cell-group>
   <van-field model:value="{{ name }}" placeholder="请输入名称" label="名称" error-message="{{nameErrMsg}}" bind:blur="checkName" />
+  <my-block title="分类">
+    <picker bindchange="bindPickerChange" value="{{catagoryIndex}}" range-key="name" range="{{catagoryOptions}}" bindchange="catagoryChanged">
+      <view class="picker">
+        当前选择：{{catagory.name}}
+      </view>
+    </picker>
+  </my-block>
   <my-block title="适合季节：">
     <van-checkbox-group value="{{ seasonList }}" bind:change="onSeasonChange" direction="horizontal">
       <van-checkbox name="spring">春</van-checkbox>
@@ -12,7 +19,7 @@
     <van-rate value="{{ rateValue }}" icon="like" void-icon="like-o" bind:change="onRateChange" />
   </my-block>
   <my-block title="上传图片(最多3张)">
-    <van-uploader file-list="{{ fileList }}" max-count="3" bind:after-read="afterRead" accept="image/*" :preview-image="true" bind:click-preview="previewPic" bind:delete="deletePic" />
+    <van-uploader file-list="{{ fileList }}" max-count="3" bind:after-read="afterRead" accept="image/*" :preview-image="true" bind:click-preview="previewPic" bind:delete="deletePic" capture="['album','camera']" />
   </my-block>
   <van-row>
     <van-col span="8" offset="16">

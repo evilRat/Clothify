@@ -1,8 +1,10 @@
 // pages/closet/newClothes/index.js
-
 import {
   uploadFile,
 } from '../../../service/file-util';
+import {
+  getCatagory
+} from "../../../service/closet";
 
 const app = getApp()
 Page({
@@ -16,7 +18,9 @@ Page({
     rateValue: 0,
     fileList: [],
     fileIDList: [],
-    seasonList: []
+    seasonList: [],
+    catagoryOptions: [],
+    catagory: {},
   },
 
   checkName(event) {
@@ -80,9 +84,9 @@ Page({
         rateValue: this.data.rateValue,
         fileIDList: this.data.fileIDList,
         seasonList: this.data.seasonList,
+        catagory: this.data.catagory.code,
       }
     }).then(res => {
-      debugger
       wx.showToast({
         title: '成功'
       }).then(() => wx.navigateBack())
@@ -94,11 +98,22 @@ Page({
     })
   },
 
+  catagoryChanged(event) {
+    this.setData({
+      catagory: this.data.catagoryOptions[event.detail.value]
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    // 获取分类
+    getCatagory().then(res => {
+      this.setData({
+        catagoryOptions: res.data[0].value
+      })
+    })
   },
 
   /**

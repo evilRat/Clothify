@@ -1,39 +1,42 @@
 // pages/closet/index.js
-import {getClosetData, getCatagory} from '../../service/closet'
+import {getClosetData, getCatagory, getClothes} from '../../service/closet'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: [],
     mainActiveIndex: 0,
     activeId: null,
-    clothes: {},
+    allClothes: [],
+    clothes: [],
     category: []
   },
 
 
   onClickNav({ detail = {} }) {
     let index = detail.index || 0
+    let clothes = this.data.allClothes.filter(e => e.catagory == this.data.category[index].code)
     this.setData({
       mainActiveIndex: index,
-      clothes: this.data.list[index].clothes,
+      clothes: clothes,
     });
   },
 
 
   async init() {
     try {
-      const result = await getClosetData();
       const catagoryRes = await getCatagory();
-      let catagory = catagoryRes.data[0].value
-      catagory.forEach(e => e.text = e.name)
-      console.log("catagory: " + catagory)
+      let catagoryData = catagoryRes.data[0].value
+      catagoryData.forEach(e => e.text = e.name)
+      console.log("catagory: " + JSON.stringify(catagoryData))
+      // 获取服装
+      let clothesRes = await getClothes()
+      let allClothes = this.data.allClothes = clothesRes.data
+      let clothes = allClothes.filter(e => e.catagory == catagoryData[0].code)
       this.setData({
-        category: catagory,
-        // list: result,
-        // clothes: result[this.data.mainActiveIndex].clothes
+        category: catagoryData,
+        clothes: clothes
       })
     } catch (error) {
       console.error("err:", error)

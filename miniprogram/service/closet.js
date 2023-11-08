@@ -1,3 +1,4 @@
+const app = getApp()
 export function getClosetData() {
   const {
     closetData
@@ -12,6 +13,17 @@ export async function getCatagory() {
   }).get({
     success: function (res) {
       console.log(res)
+      resolve(res)
+    }
+  }))
+}
+
+
+export async function getClothes() {
+  let db = wx.cloud.database()
+  return new Promise((resolve, reject) => db.collection("clothes").where({
+  }).get({
+    success: res => {
       resolve(res)
     }
   }))
